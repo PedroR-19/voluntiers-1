@@ -12,6 +12,7 @@
     <div class="profiles-dashboard-container">
       <h3>Your vagas</h3>
 
+      {% if user.User_type == 'ONG' %}
       <ul>
         {% for vaga in vagas %}
           <li>
@@ -33,6 +34,7 @@
         {% endfor %}
       </ul>
     </div>
+    {% endif %}
   </div>
 
 
