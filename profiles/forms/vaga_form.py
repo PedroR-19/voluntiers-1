@@ -14,22 +14,23 @@ class ProfileVagaForm(forms.ModelForm):
 
         self._my_errors = defaultdict(list)
 
-        add_attr(self.fields.get('steps'), 'class', 'span-2')
+        add_attr(self.fields.get('requirements'), 'class', 'span-2')
 
     class Meta:
         model = Vaga
-        fields = 'title', 'description', 'time', \
-            'time_unit', 'steps', 'cover'
+        fields = 'title', 'description', 'salary', \
+            'types', 'requirements', 'cover'
         widgets = {
             'cover': forms.FileInput(
                 attrs={
                     'class': 'span-2'
                 }
             ),
-            'time_unit': forms.Select(
+            'types': forms.Select(
                 choices=(
-                    ('Days', 'Days'),
-                    ('Weeks', 'Weeks'),
+                    ('PJ', 'PJ'),
+                    ('CLT', 'CLT'),
+                    ('Voluntier', 'Voluntier')
                 ),
             ),
         }
@@ -58,8 +59,8 @@ class ProfileVagaForm(forms.ModelForm):
 
         return title
 
-    def clean_time(self):
-        field_name = 'time'
+    def clean_salary(self):
+        field_name = 'salary'
         field_value = self.cleaned_data.get(field_name)
 
         if not is_positive_number(field_value):

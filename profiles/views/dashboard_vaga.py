@@ -66,7 +66,7 @@ class DashboardVaga(View):
             vaga = form.save(commit=False)
 
             vaga.profile = request.user
-            vaga.steps_is_html = False
+            vaga.requirements_is_html = False
             vaga.is_published = False
 
             vaga.save()

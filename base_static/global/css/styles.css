@@ -258,7 +258,7 @@ a {
   box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.preparation-steps {
+.preparation-requirements {
   padding: var(--spacing-gutter-medium);
 }
 
@@ -281,19 +281,19 @@ a {
   filter: brightness(0.8);
 }
 
-.preparation-steps h1,
-.preparation-steps h2,
-.preparation-steps h3,
-.preparation-steps h4,
-.preparation-steps h5,
-.preparation-steps h6,
-.preparation-steps p,
-.preparation-steps pre {
+.preparation-requirements h1,
+.preparation-requirements h2,
+.preparation-requirements h3,
+.preparation-requirements h4,
+.preparation-requirements h5,
+.preparation-requirements h6,
+.preparation-requirements p,
+.preparation-requirements pre {
   margin: 2rem 0;
 }
 
-.preparation-steps ol,
-.preparation-steps ul {
+.preparation-requirements ol,
+.preparation-requirements ul {
   margin: 2rem;
   padding: 0 2rem;
 }

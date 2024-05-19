@@ -50,7 +50,7 @@
         <div class="vaga-meta vaga-preparation">
             <h3 class="vaga-meta-title"><i class="fas fa-stopwatch"></i> Prazo</h3>
             <div class="vaga-meta-text">
-                {{ vaga.time }} {{ vaga.time_unit }}
+                {{ vaga.salary }} {{ vaga.types }}
             </div>
         </div>
     </div>
@@ -65,11 +65,11 @@
     {% endif %}
 
     {% if is_detail_page is True %}
-        <div class="preparation-steps">
-            {% if vaga.steps_is_html is True %}
-                {{ vaga.steps|safe }}
+        <div class="preparation-requirements">
+            {% if vaga.requirements_is_html is True %}
+                {{ vaga.requirements|safe }}
             {% else %}
-                {{ vaga.steps|linebreaksbr }}
+                {{ vaga.requirements|linebreaksbr }}
             {% endif %}
         </div>
     {% endif %}
