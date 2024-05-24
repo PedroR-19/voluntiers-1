@@ -10,6 +10,9 @@
     {% include 'global/partials/messages.html' %}
 
     <div class="profiles-dashboard-container">
+    {% if user.user_type == "('ONG', 'ONG')" %}
+        {{ user.user_type }}
+    {% endif %}
       <h3>Your vagas</h3>
 
       {% if user.User_type == 'ONG' %}
