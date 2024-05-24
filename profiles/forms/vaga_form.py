@@ -4,8 +4,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from vagas.models import Vaga
-from utils.django_forms import add_attr
-from utils.strings import is_positive_number
+from .django_forms import add_attr
+from .strings import is_positive_number
 
 
 class ProfileVagaForm(forms.ModelForm):

@@ -3,7 +3,7 @@ from django.http.response import Http404
 from django.views.generic import DetailView, ListView
 
 from vagas.models import Vaga
-from utils.pagination import make_pagination
+from .pagination import make_pagination
 
 PER_PAGE = 6
 
