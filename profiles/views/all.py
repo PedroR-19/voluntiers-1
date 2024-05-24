@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from vagas.models import Vaga
 from profiles.models import Profile
+from django.contrib.auth.models import User
 
 
 def register_view(request):
@@ -30,9 +31,8 @@ def register_create(request):
         user = form.save(commit=False)
         user.set_password(user.password)
         user.save()
-        choice_index = 0 if form.cleaned_data['user_type'] == 'ONG' else 1
         profile = Profile.objects.create(user_id=user.id,
-                                         user_type=Profile.USER_TYPE_CHOICES[choice_index])
+                                         user_type=form.cleaned_data['user_type'])
         profile.save()
         messages.success(request, 'Your user is created, please log in.')
 
@@ -90,7 +90,10 @@ def logout_view(request):
 
 @login_required(login_url='profiles:login', redirect_field_name='next')
 def dashboard(request):
-    user = Profile.objects.get(user=request.user)
+    user = request.user
+    profile = ''
+    if not request.user.is_superuser:
+        profile = Profile.objects.get(user_id=request.user.id)
     vagas = Vaga.objects.filter(
         is_published=False,
         profile=request.user
@@ -101,5 +104,6 @@ def dashboard(request):
         context={
             'vagas': vagas,
             'user': user,
+            'profile': profile
         }
     )
