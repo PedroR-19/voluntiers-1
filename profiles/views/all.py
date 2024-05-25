@@ -1,13 +1,13 @@
-from profiles.forms import LoginForm, RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from vagas.models import Vaga
+
+from profiles.forms import LoginForm, RegisterForm
 from profiles.models import Profile
-from django.contrib.auth.models import User
+from vagas.models import Vaga
 
 
 def register_view(request):
