@@ -3,7 +3,10 @@
   Your are logged in with 
   {{ request.user.username }}. 
   <a href="{% url 'profiles:dashboard' %}">See your vaga</a>,
-  <a href="{% url 'profiles:dashboard_vaga_new' %}">create a new vaga button</a> or
+  {% if profile.user_type == 'ONG' %}
+    <a href="{% url 'profiles:dashboard_vaga_new' %}">create a new vaga</a>
+  {% endif %}  
+    or
   <form class="inline-form" action="{% url 'profiles:logout' %}" method='POST'>
     {% csrf_token %}
     <input type="hidden" name="username" value="{{ request.user.username }}">

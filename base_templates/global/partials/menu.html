@@ -2,8 +2,12 @@
     <nav class="menu-nav">
       <a href="{% url 'vagas:home' %}">Home</a>
       {% if user.is_authenticated %}
+        {% if profile.user_type == 'Voluntier' %}
+          <a href="{% url 'profiles:dashboard' %}">Dashboard</a>
+        {% else %}
         <a href="{% url 'profiles:dashboard_vaga_new' %}">New vaga</a>
         <a href="{% url 'profiles:dashboard' %}">Dashboard</a>
+        {% endif %}
       {% else %}
         <a href="{% url 'profiles:login' %}">Login</a>
         <a href="{% url 'profiles:register' %}">Register</a>
