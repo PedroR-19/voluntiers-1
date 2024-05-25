@@ -1,8 +1,10 @@
 from django.db.models import Q
 from django.http.response import Http404
 from django.views.generic import DetailView, ListView
-
-from vagas.models import Vaga
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from vagas.models import Vaga, Candidatura
+from vagas.forms import CandidaturaForm
 from .pagination import make_pagination
 
 PER_PAGE = 6
@@ -111,3 +113,19 @@ class VagaDetail(DetailView):
         })
 
         return ctx
+
+
+@login_required
+def candidatar_vaga(request, vaga_id):
+    vaga = get_object_or_404(Vaga, id=vaga_id)
+    if request.method == 'POST':
+        form = CandidaturaForm(request.POST, request.FILES)
+        if form.is_valid():
+            candidatura = form.save(commit=False)
+            candidatura.vaga = vaga
+            candidatura.candidato = request.user
+            candidatura.save()
+            return redirect('vagas:vaga', pk=vaga.id)
+    else:
+        form = CandidaturaForm()
+    return render(request, 'vagas/pages/candidatar_vaga.html', {'form': form, 'vaga': vaga})

@@ -1,8 +1,9 @@
+# vagas/models.py
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-
 
 class Category(models.Model):
     name = models.CharField(max_length=65)
@@ -44,3 +45,14 @@ class Vaga(models.Model):
             self.slug = slug
 
         return super().save(*args, **kwargs)
+
+
+class Candidatura(models.Model):
+    vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE, related_name='candidaturas_vaga')
+    candidato = models.ForeignKey(User, on_delete=models.CASCADE)
+    curriculo = models.FileField(upload_to='curriculos/%Y/%m/%d/')
+    data_candidatura = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.candidato.username} - {self.vaga.title}'
+    

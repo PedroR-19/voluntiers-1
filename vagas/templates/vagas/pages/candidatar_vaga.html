@@ -1,0 +1,12 @@
+{% extends 'global/base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+  <h1>Candidatar-se à vaga: {{ vaga.title }}</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar candidatura</button>
+  </form>
+{% endblock %}

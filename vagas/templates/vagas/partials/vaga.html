@@ -15,7 +15,6 @@
     </div>
 
     <div class="vaga-profile">
-
         {% if vaga.profile is not None %}
             <span class="vaga-profile-item">
                 <i class="fas fa-user"></i>
@@ -72,6 +71,14 @@
                 {{ vaga.requirements|linebreaksbr }}
             {% endif %}
         </div>
-    {% endif %}
 
+        {% if user.is_authenticated and user.profile.user_type == 'Voluntier' %}
+            <a class="vaga-read-more button button-dark button-full-width" href="{% url 'vagas:candidatar_vaga' vaga.id %}">
+                <i class="fas fa-hand-paper"></i>
+                <span>Candidatar-se</span>
+            </a>
+        {% else %}
+            <p>Você precisa estar logado como Voluntário para se candidatar a esta vaga.</p>
+        {% endif %}
+    {% endif %}
 </div>
