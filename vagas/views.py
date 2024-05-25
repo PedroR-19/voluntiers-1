@@ -115,6 +115,12 @@ class VagaDetail(DetailView):
         return ctx
 
 
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from vagas.models import Vaga, Candidatura
+from vagas.forms import CandidaturaForm
+
 @login_required
 def candidatar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vaga, id=vaga_id)
@@ -125,7 +131,9 @@ def candidatar_vaga(request, vaga_id):
             candidatura.vaga = vaga
             candidatura.candidato = request.user
             candidatura.save()
-            return redirect('vagas:vaga', pk=vaga.id)
+            messages.success(request, 'Sua candidatura foi enviada!')
+            return redirect('profiles:dashboard')
     else:
         form = CandidaturaForm()
     return render(request, 'vagas/pages/candidatar_vaga.html', {'form': form, 'vaga': vaga})
+

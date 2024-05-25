@@ -1,9 +1,6 @@
-# from django.contrib.auth import get_user_model
+# profiles/models.py
 from django.contrib.auth.models import User
 from django.db import models
-
-# User = get_user_model()
-
 
 class Profile(models.Model):
     USER_TYPE_CHOICES = [
