@@ -8,10 +8,6 @@ from profiles.models import Profile
 def dashboard(request):
     profile = get_object_or_404(Profile, user=request.user)
 
-    # Debugging
-    print(f'User Type: {profile.user_type}')
-
-
     # Inicializa o contexto com o perfil e o tipo de usuário
     context = {
         'profile': profile,

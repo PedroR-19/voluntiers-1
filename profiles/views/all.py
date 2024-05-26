@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from profiles.forms import LoginForm, RegisterForm
 from profiles.models import Profile
-from vagas.models import Vaga
+from vagas.models import Vaga, Candidatura
 
 
 def register_view(request):
@@ -91,19 +91,34 @@ def logout_view(request):
 @login_required(login_url='profiles:login', redirect_field_name='next')
 def dashboard(request):
     user = request.user
-    profile = ''
+    profile = request.user.profile
     if not request.user.is_superuser:
         profile = Profile.objects.get(user_id=request.user.id)
-    vagas = Vaga.objects.filter(
-        is_published=False,
-        profile=request.user
-    )
-    return render(
-        request,
-        'profiles/pages/dashboard.html',
-        context={
-            'vagas': vagas,
-            'user': user,
-            'profile': profile
-        }
-    )
+    if profile.user_type == 'ONG':
+        vagas = Vaga.objects.filter(
+            profile=request.user
+        )
+        return render(
+            request,
+            'profiles/pages/dashboard.html',
+            context={
+                'vagas': vagas,
+                'user_type': profile.user_type,
+                'user': request.user,
+                'profile': profile
+            }
+        )
+    elif profile.user_type == 'Voluntier':
+        candidaturas = Candidatura.objects.filter(
+            candidato=request.user
+        )
+        return render(
+            request,
+            'profiles/pages/dashboard.html',
+            context={
+                'candidaturas': candidaturas,
+                'user_type': profile.user_type,
+                'user': request.user,
+                'profile': profile
+            }
+        )
