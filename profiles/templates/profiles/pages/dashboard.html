@@ -1,48 +1,49 @@
 {% extends 'global/base.html' %}
 
-{% block title %}Dashboard ({{ user.id }}) | {% endblock title %}
+{% block title %}Dashboard ({{ user }}) | {% endblock title %}
 
 {% block content %}
   <div class="main-content center container">
-
     <h2>Dashboard ({{ user }})</h2>
 
     {% include 'profiles/partials/login_message.html' %}
     {% include 'global/partials/messages.html' %}
 
-
     <div class="profiles-dashboard-container">
-    {{ user }}
-    {{ profile.user_type }}
-    {% if user.user_type == "('ONG', 'ONG')" %}
-        {{ user.user_type }}
-    {% endif %}
-      <h3>Your vagas</h3>
+      <h3>Your vagas or candidaturas</h3>
 
-      {% if user.User_type == 'ONG' %}
-      <ul>
-        {% for vaga in vagas %}
-          <li>
-            <a href="{% url 'profiles:dashboard_vaga_edit' vaga.id %}">{{ vaga.title }}</a> -
-            <form 
-            class="inline-form form-delete" 
-            action="{% url 'profiles:dashboard_vaga_delete' %}"
-            method='POST'
-            >
-              {% csrf_token %}
-              <input type="hidden" name="id" value="{{ vaga.id }}">
-              <button class="plaintext-button" type="submit">❌</button>
-            </form>
-          </li>
-        {% empty %}
-          <li>
-            <p>You do not have vagas, please create one.</p>
-          </li>
-        {% endfor %}
-      </ul>
+      {% if user_type == 'ONG' %}
+        <ul>
+          {% for vaga in vagas %}
+            <li>
+              <a href="{% url 'profiles:dashboard_vaga_edit' vaga.id %}">{{ vaga.title }}</a>
+              <form class="inline-form form-delete" action="{% url 'profiles:dashboard_vaga_delete' %}" method='POST'>
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ vaga.id }}">
+                <button class="plaintext-button" type="submit">❌</button>
+              </form>
+            </li>
+          {% empty %}
+            <li>
+              <p>You do not have any open vacancies.</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% elif user_type == 'Voluntier' %}
+        <ul>
+          {% for candidatura in candidaturas %}
+            <li>
+              {{ candidatura.vaga.title }} - Applied on {{ candidatura.data_candidatura }}
+            </li>
+          {% empty %}
+            <li>
+              <p>You have not applied to any vacancies.</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>User type not recognized.</p>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
-
-
-  {% endblock content %}
+{% endblock content %}
