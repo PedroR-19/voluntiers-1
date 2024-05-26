@@ -6,7 +6,7 @@ from profiles.models import Profile
 
 @login_required
 def dashboard(request):
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = request.user.profile
 
     # Inicializa o contexto com o perfil e o tipo de usuário
     context = {
@@ -15,11 +15,11 @@ def dashboard(request):
     }
 
     # Identifica o tipo de usuário e busca os dados correspondentes
-    if profile.user_type == 'ONG':
-        vagas = Vaga.objects.filter(profile=request.user)
-        context['vagas'] = vagas
-    elif profile.user_type == 'Voluntier':
+    if profile.user_type == 'Voluntier':
         candidaturas = Candidatura.objects.filter(candidato=request.user)
         context['candidaturas'] = candidaturas
+    else:
+        vagas = Vaga.objects.filter(profile=request.user)
+        context['vagas'] = vagas
 
     return render(request, 'profiles/pages/dashboard.html', context)

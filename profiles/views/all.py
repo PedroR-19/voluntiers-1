@@ -94,21 +94,7 @@ def dashboard(request):
     profile = request.user.profile
     if not request.user.is_superuser:
         profile = Profile.objects.get(user_id=request.user.id)
-    if profile.user_type == 'ONG':
-        vagas = Vaga.objects.filter(
-            profile=request.user
-        )
-        return render(
-            request,
-            'profiles/pages/dashboard.html',
-            context={
-                'vagas': vagas,
-                'user_type': profile.user_type,
-                'user': request.user,
-                'profile': profile
-            }
-        )
-    elif profile.user_type == 'Voluntier':
+    if profile.user_type == 'Voluntier':
         candidaturas = Candidatura.objects.filter(
             candidato=request.user
         )
@@ -117,6 +103,20 @@ def dashboard(request):
             'profiles/pages/dashboard.html',
             context={
                 'candidaturas': candidaturas,
+                'user_type': profile.user_type,
+                'user': request.user,
+                'profile': profile
+            }
+        )
+    else:
+        vagas = Vaga.objects.filter(
+            profile=request.user
+        )
+        return render(
+            request,
+            'profiles/pages/dashboard.html',
+            context={
+                'vagas': vagas,
                 'user_type': profile.user_type,
                 'user': request.user,
                 'profile': profile
