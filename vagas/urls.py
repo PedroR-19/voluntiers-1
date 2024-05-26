@@ -6,7 +6,6 @@ from . import views
 app_name = 'vagas'
 
 urlpatterns = [
-    # path('', views.VagaListViewHome.as_view(), name="home"),
     path('', views.vaga_list_view_home, name="home"),
     path('vagas/search/', views.VagaListViewSearch.as_view(), name="search"),
     path('vagas/category/<int:category_id>/', views.VagaListViewCategory.as_view(), name="category"),

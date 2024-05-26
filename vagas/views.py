@@ -2,6 +2,11 @@ from django.db.models import Q
 from django.http.response import Http404
 from django.views.generic import DetailView, ListView
 
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from vagas.models import Vaga, Candidatura
+from vagas.forms import CandidaturaForm
+
 from profiles.models import Profile
 from vagas.models import Vaga
 from .pagination import make_pagination
@@ -35,22 +40,25 @@ class VagaListViewBase(ListView):
         return ctx
 
 
-# class VagaListViewHome(VagaListViewBase):
-#     template_name = 'vagas/pages/home.html'
-
+@login_required
 def vaga_list_view_home(request):
     user = request.user
-    profile = ''
-    if not request.user.is_superuser:
-        profile = Profile.objects.get(user_id=request.user.id)
+    profile = None
+    if not user.is_superuser:
+        profile = get_object_or_404(Profile, user_id=user.id)
+
+    vagas = Vaga.objects.all()
+
     return render(
         request,
         'vagas/pages/home.html',
         context={
             'user': user,
-            'profile': profile
+            'profile': profile,
+            'vagas': vagas,  # Passando as vagas para o template
         },
     )
+
 
 
 class VagaListViewCategory(VagaListViewBase):
