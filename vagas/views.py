@@ -40,24 +40,32 @@ class VagaListViewBase(ListView):
         return ctx
 
 
-@login_required
 def vaga_list_view_home(request):
     user = request.user
-    profile = None
-    if not user.is_superuser:
-        profile = get_object_or_404(Profile, user_id=user.id)
-
     vagas = Vaga.objects.all()
 
-    return render(
-        request,
-        'vagas/pages/home.html',
-        context={
-            'user': user,
-            'profile': profile,
-            'vagas': vagas,  # Passando as vagas para o template
-        },
-    )
+    if user.is_authenticated:
+        profile = None
+        if not user.is_superuser:
+            profile = get_object_or_404(Profile, user_id=user.id)
+
+        return render(
+            request,
+            'vagas/pages/home.html',
+            context={
+                'user': user,
+                'profile': profile,
+                'vagas': vagas,
+            }
+        )
+    else:
+        return render(
+            request,
+            'vagas/pages/home.html',
+            context={
+                'vagas': vagas,
+            }
+        )
 
 
 
