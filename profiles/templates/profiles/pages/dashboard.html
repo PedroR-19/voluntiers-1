@@ -20,7 +20,6 @@
               <form class="inline-form form-delete" action="{% url 'profiles:dashboard_vaga_delete' %}" method='POST'>
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ vaga.id }}">
-                <button class="plaintext-button" type="submit">❌</button>
               </form>
             </li>
           {% empty %}
