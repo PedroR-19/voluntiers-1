@@ -42,7 +42,10 @@ class VagaListViewBase(ListView):
 
 def vaga_list_view_home(request):
     user = request.user
-    vagas = Vaga.objects.all()
+    vagas = Vaga.objects.all(
+    ).filter(
+        is_published=True
+    )
 
     if user.is_authenticated:
         profile = None
