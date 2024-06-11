@@ -18,8 +18,8 @@ DEBUG = 1
 
 ALLOWED_HOSTS: list[str] = ['*']
 
-ALLOWED_HOSTS = ['.vercel.app']
-#ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
