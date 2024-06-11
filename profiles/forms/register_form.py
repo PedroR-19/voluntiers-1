@@ -7,13 +7,13 @@ from .django_forms import add_placeholder, strong_password
 class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        add_placeholder(self.fields['user_type'], 'ONG or Voluntier')
-        add_placeholder(self.fields['username'], 'Your username')
-        add_placeholder(self.fields['email'], 'Your e-mail')
-        add_placeholder(self.fields['first_name'], 'Ex.: John')
-        add_placeholder(self.fields['last_name'], 'Ex.: Doe')
-        add_placeholder(self.fields['password'], 'Type your password')
-        add_placeholder(self.fields['password2'], 'Repeat your password')
+        add_placeholder(self.fields['user_type'], 'ONG ou Voluntier')
+        add_placeholder(self.fields['username'], 'Seu nome de usuário')
+        add_placeholder(self.fields['email'], 'Seu e-mail')
+        add_placeholder(self.fields['first_name'], 'Ex.: Pedro')
+        add_placeholder(self.fields['last_name'], 'Ex.: Costa')
+        add_placeholder(self.fields['password'], 'Digite sua senha')
+        add_placeholder(self.fields['password2'], 'Repita sua senha')
 
     user_type = forms.ChoiceField(
     choices=[
@@ -27,8 +27,8 @@ class RegisterForm(forms.ModelForm):
     username = forms.CharField(
         label='Username',
         help_text=(
-            'Username must have letters, numbers or one of those @.+-_. '
-            'The length should be between 4 and 150 characters.'
+            'Nome de usuário deve conter letras, números ou um destes: @.+-_. '
+            'Nome de usuário deve conter entre 4 e 150 caracteres.'
         ),
         error_messages={
             'required': 'This field must not be empty',
@@ -48,7 +48,7 @@ class RegisterForm(forms.ModelForm):
     email = forms.EmailField(
         error_messages={'required': 'E-mail is required'},
         label='E-mail',
-        help_text='The e-mail must be valid.',
+        help_text='O e-mail deve ser válido.',
     )
     password = forms.CharField(
         widget=forms.PasswordInput(),
@@ -56,9 +56,9 @@ class RegisterForm(forms.ModelForm):
             'required': 'Password must not be empty'
         },
         help_text=(
-            'Password must have at least one uppercase letter, '
-            'one lowercase letter and one number. The length should be '
-            'at least 8 characters.'
+            'Senha deve conter ao menos uma letra maiúscula, '
+            'uma letra minúscula e um número.'
+            'ao menos 8 caracteres.'
         ),
         validators=[strong_password],
         label='Password'
@@ -88,7 +88,7 @@ class RegisterForm(forms.ModelForm):
 
         if exists:
             raise ValidationError(
-                'User e-mail is already in use', code='invalid',
+                'Este e-mail já está em uso.', code='invalid',
             )
 
         return email
@@ -101,7 +101,7 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                'Password and password2 must be equal',
+                'Password e Password2 devem ser iguais',
                 code='invalid'
             )
             raise ValidationError({

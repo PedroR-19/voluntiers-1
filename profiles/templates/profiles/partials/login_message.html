@@ -1,24 +1,24 @@
 {% if user.is_authenticated %}
 <div class="login-message">
-  Your are logged in with 
+  Você está logado como 
   {{ request.user.username }}. 
   {% if profile.user_type == 'ONG' %}
-  <a href="{% url 'profiles:dashboard' %}">See your vagas</a>,
-    <a href="{% url 'profiles:dashboard_vaga_new' %}">create a new vaga</a>
-    or
+  <a href="{% url 'profiles:dashboard' %}">Acesse suas vagas</a>,
+    <a href="{% url 'profiles:dashboard_vaga_new' %}">crie uma nova vaga</a>
+    ou
     <form class="inline-form" action="{% url 'profiles:logout' %}" method='POST'>
       {% csrf_token %}
       <input type="hidden" name="username" value="{{ request.user.username }}">
-      <button class="plaintext-button" type="submit">click here</button>
-    </form> to logout.
+      <button class="plaintext-button" type="submit">clique aqui</button>
+    </form> para fazer logout.
   </div>
   {% else %}
-    <a href="{% url 'profiles:dashboard' %}">See your applications</a>
-    or
+    <a href="{% url 'profiles:dashboard' %}">Veja suas candidaturas</a>
+    ou
     <form class="inline-form" action="{% url 'profiles:logout' %}" method='POST'>
       {% csrf_token %}
       <input type="hidden" name="username" value="{{ request.user.username }}">
-      <button class="plaintext-button" type="submit">click here</button>
-    </form> to logout.
+      <button class="plaintext-button" type="submit">clique aqui</button>
+    </form> para fazer logout.
   {% endif %}  
 {% endif %}
