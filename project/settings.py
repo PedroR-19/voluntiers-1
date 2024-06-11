@@ -16,8 +16,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 1
 
+<<<<<<< Updated upstream
 ALLOWED_HOSTS: list[str] = ['*']
 
+=======
+#ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
+>>>>>>> Stashed changes
 
 # Application definition
 
