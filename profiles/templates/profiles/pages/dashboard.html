@@ -10,7 +10,7 @@
     {% include 'global/partials/messages.html' %}
 
     <div class="profiles-dashboard-container">
-      <h3>Your vagas or candidaturas</h3>
+      <h3>Suas vagas ou candidaturas</h3>
 
       {% if user_type == 'ONG' %}
         <ul>
@@ -24,7 +24,7 @@
             </li>
           {% empty %}
             <li>
-              <p>You do not have any open vacancies.</p>
+              <p>Você ainda não tem nenhuma vaga aberta.</p>
             </li>
           {% endfor %}
         </ul>
@@ -32,11 +32,11 @@
         <ul>
           {% for candidatura in candidaturas %}
             <li>
-              {{ candidatura.vaga.title }} - Applied on {{ candidatura.data_candidatura }}
+              {{ candidatura.vaga.title }} - Candidatura feita em {{ candidatura.data_candidatura }}
             </li>
           {% empty %}
             <li>
-              <p>You have not applied to any vacancies.</p>
+              <p>Você ainda não se candidatou a nenhuma vaga.</p>
             </li>
           {% endfor %}
         </ul>

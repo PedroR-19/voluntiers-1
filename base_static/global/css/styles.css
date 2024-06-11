@@ -55,8 +55,8 @@ html {
 body {
   font-size: 1.6rem;
   font-family: var(--font-primary);
-  background: var(--color-gray-1);
-  color: var(--color-dark-text);
+  background: rgb(254, 238, 184);
+  color: rgb(126, 68, 0);
 }
 
 h1,
@@ -73,7 +73,7 @@ img {
 }
 
 a {
-  color: var(--color-primary);
+  color: rgb(126, 68, 0);
   text-decoration: none;
 }
 
@@ -84,12 +84,12 @@ a {
 }
 
 .main-header-container {
-  background: var(--color-primary-dark);
+  background: rgb(246, 167, 0);
 }
 
 .main-logo {
   font-size: 4rem;
-  color: var(--color-white);
+  color: rgb(126, 68, 0);
   text-decoration: none;
   display: flex;
   flex-flow: row nowrap;
@@ -263,17 +263,25 @@ a {
 }
 
 .main-footer {
-  display: flex;
+  display: fixed;
   align-items: center;
   justify-content: space-between;
-  background: var(--color-primary-dark);
+  background: rgb(246, 167, 0);
   color: var(--color-white);
   padding: var(--spacing-gutter-large);
 }
 
 .main-footer a {
-  color: var(--color-white);
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(126, 68, 0);
   text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
   transition: all 300ms ease-in-out;
 }
 
@@ -526,10 +534,13 @@ a {
 }
 
 .menu-nav {
-  display: flex;
-  flex-flow: column wrap;
+  display: fixed;
+  flex-flow: row;
   font-family: var(--font-headings);
   font-size: 2rem;
+  text-align: right;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .menu-nav a {
