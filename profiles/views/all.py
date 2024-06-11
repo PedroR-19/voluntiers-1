@@ -34,7 +34,7 @@ def register_create(request):
         profile = Profile.objects.create(user_id=user.id,
                                          user_type=form.cleaned_data['user_type'])
         profile.save()
-        messages.success(request, 'Seu usuário foi criado, por favor faça login.')
+        messages.success(request, 'Your user is created, please log in.')
 
         del (request.session['register_form_data'])
         return redirect(reverse('profiles:login'))
@@ -63,12 +63,12 @@ def login_create(request):
         )
 
         if authenticated_user is not None:
-            messages.success(request, 'Você fez login!')
+            messages.success(request, 'Your are logged in.')
             login(request, authenticated_user)
         else:
-            messages.error(request, 'Credenciais inválidas')
+            messages.error(request, 'Invalid credentials')
     else:
-        messages.error(request, 'Nome de usuário ou senha inválidos')
+        messages.error(request, 'Invalid username or password')
 
     return redirect(reverse('profiles:dashboard'))
 
@@ -76,14 +76,14 @@ def login_create(request):
 @login_required(login_url='profiles:login', redirect_field_name='next')
 def logout_view(request):
     if not request.POST:
-        messages.error(request, 'Requisição de logout inválida')
+        messages.error(request, 'Invalid logout request')
         return redirect(reverse('profiles:login'))
 
     if request.POST.get('username') != request.user.username:
         messages.error(request, 'Invalid logout user')
         return redirect(reverse('profiles:login'))
 
-    messages.success(request, 'Logout feito com sucesso')
+    messages.success(request, 'Logged out successfully')
     logout(request)
     return redirect(reverse('profiles:login'))
 

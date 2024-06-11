@@ -17,9 +17,9 @@ def strong_password(password):
 
     if not regex.match(password):
         raise ValidationError((
-            'Senha deve conter ao menos uma letra, '
-            'maiúscula, uma letra minúscula e um número e '
-            'ao menos 8 caracteres.'
+            'Password must have at least one uppercase letter, '
+            'one lowercase letter and one number. The length should be '
+            'at least 8 characters.'
         ),
             code='invalid'
         )
