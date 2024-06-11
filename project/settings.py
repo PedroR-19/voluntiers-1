@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 from django.contrib.messages import constants
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +18,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 1
 
-ALLOWED_HOSTS: list[str] = ['*']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -70,12 +72,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': os.environ.get('DATABASE_ENGINE'),
-        #'NAME': os.environ.get('DATABASE_NAME'),
-        #'USER': os.environ.get('DATABASE_USER'),
-        #'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        #'HOST': os.environ.get('DATABASE_HOST'),
-        #'PORT': os.environ.get('DATABASE_PORT'),
+        #'ENGINE': config('DATABASE_ENGINE', default='django.db.backends.postgresql'),
+        #'NAME': config('DATABASE_NAME', default='nome_do_seu_banco'),
+        #'USER': config('DATABASE_USER', default='seu_usuario'),
+        #'PASSWORD': config('DATABASE_PASSWORD', default='sua_senha'),
+        #'HOST': config('DATABASE_HOST', default='localhost'),
+        #'PORT': config('DATABASE_PORT', default='5432'),
 
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
