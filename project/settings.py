@@ -15,9 +15,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 1
-ALLOWED_HOSTS: list[str] = ['*']
 
-# DEBUG = 1
+ALLOWED_HOSTS: list[str] = ['voluntiersapp.com']
+
+CSRF_TRUSTED_ORIGINS: list[str] = ['https://voluntiersapp.com']
+
+#CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5500']
 
 # Application definition
 
@@ -70,15 +73,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': os.environ.get('DATABASE_ENGINE'),
-        #'NAME': os.environ.get('DATABASE_NAME'),
-        #'USER': os.environ.get('DATABASE_USER'),
-        #'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        #'HOST': os.environ.get('DATABASE_HOST'),
-        #'PORT': os.environ.get('DATABASE_PORT'),
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
 
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
