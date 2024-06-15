@@ -110,7 +110,6 @@ def dashboard(request):
         )
     else:
         vagas = Vaga.objects.filter(
-            is_published=False,
             profile=request.user
         )
         return render(

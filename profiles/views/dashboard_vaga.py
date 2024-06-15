@@ -29,7 +29,6 @@ class DashboardVaga(View):
 
         if id is not None:
             vaga = Vaga.objects.filter(
-                is_published=False,
                 profile=self.request.user,
                 pk=id,
             ).first()
@@ -67,7 +66,6 @@ class DashboardVaga(View):
 
             vaga.profile = request.user
             vaga.requirements_is_html = False
-            vaga.is_published = False
 
             vaga.save()
 
